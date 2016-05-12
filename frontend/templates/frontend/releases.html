@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load utils %}
+{% block content %}
+    {% if releases %}
+        {% for each in releases %}
+            <div class="col-md-12">
+                <h2 class="lead">{{ each.release.title }}<small class="pull-right">{{ each.release.get_type_display }}</small></h2>
+                <p class="lead-desc">Release date: {{ each.release.date|date:'d M Y'  }}</p>
+            </div>
+
+            <div class="col-md-8">
+                <!--<img src="{{ each.release.get_cover }}" alt="{{ each.release.title }}">-->
+                <img src="../static/img/cover.jpg" alt="Autumn Train">
+            </div>
+
+            <div class="col-md-4">
+                {% for key, value in each.links.items %}
+                    {% if key %}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{{ value }}" target="_blank">
+                                  <img class="media-object" src="../static/img/icons/{{ key }}.png" alt="{{ key|name_format }}" data-toggle="tooltip" data-placement="left" title="{{ key|name_format }}" />
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ key|name_format }}</h4>
+                                  <p {% if active_page == 'buy' %}><a href="{{ value }}" target="_blank">Buy Now</a>{% endif %}</p>
+                                  <p {% if active_page == 'online' %}><a href="{{ value }}" target="_blank">Listeting Online</a>{% endif %}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+

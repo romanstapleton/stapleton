@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="col-md-12">
+    <h3 class="page-header">Contact</h3>
+</div>
+
+<div class="row marketing">
+    <div class="col-md-12">
+        <div class="success_message">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <form role="form" action="" method="post" class="form-container">{% csrf_token %}
+            <label>{{ form.contact_name.label }}</label>
+            <div class="required">{{form.contact_name}}</div>
+            {{form.contact_name.errors}}
+
+            <label>{{ form.contact_email.label }}</label>
+            <div class="required">{{form.contact_email}}</div>
+            {{form.contact_email.errors}}
+
+            <label>{{ form.content.label }}</label>
+            <div class="required">{{form.content}}</div>
+            {{form.content.errors}}
+
+                <div class="col-lg-12">
+                    <div class="pull-right"><img src="/static/img/required.png" alt="Required field"> required fields</div>
+                </div>
+                <button class="btn btn-default" type="reset">Reset</button>
+                <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="col-lg-6"></div>
+</div>
+{% endblock %}
